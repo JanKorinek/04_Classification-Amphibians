@@ -210,7 +210,7 @@ def train_model(X_train, X_test, y_train, y_test, pipe, param_grid,
                               random_state=42,
                               n_jobs = -1,
                               scoring=scoring,
-                              refit='f1_samples',)
+                              refit='roc_auc',)
     rand.fit(X_train, y_train)
     y_pred = rand.predict(X_test)
 
@@ -293,7 +293,7 @@ if __name__ == "__main__":
     # General Parameters
     input_params = {
         'n_splits': 5,
-        'n_iter': 16,
+        'n_iter': 8,
     }
 
     # Data import

@@ -4,6 +4,7 @@ plot inspired by
 https://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html#sphx-glr-auto-examples-model-selection-plot-learning-curve-py
 """
 # Libraries import
+import warnings
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -11,6 +12,10 @@ from sklearn.model_selection import TimeSeriesSplit, learning_curve
 from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
+
+# Warnings turn off
+warnings.simplefilter('ignore', np.RankWarning)
+warnings.filterwarnings('ignore')
 
 plt.style.use('seaborn')
 

@@ -3,9 +3,12 @@
 Collection of functions for data ingestion and datasets modification.
 """
 #Libraries Import
-import time
+import time, warnings
 import pandas as pd
 
+# Warnings turn off
+warnings.filterwarnings('ignore')
+warnings.warn('ignore')
 
 if __name__ == "__main__":
     # Runtime initiation

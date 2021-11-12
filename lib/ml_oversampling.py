@@ -1,6 +1,11 @@
+import warnings
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+# Warnings turn off
+warnings.simplefilter('ignore', np.RankWarning)
+warnings.filterwarnings('ignore')
 
 class MLSol:
     def __init__(self):

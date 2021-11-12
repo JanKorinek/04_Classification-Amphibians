@@ -3,7 +3,7 @@
 Collection of support functions for EDA.
 """
 # Libraries import
-import time
+import time, warnings
 import numpy as np
 import pandas
 import pandas as pd
@@ -14,6 +14,9 @@ from sklearn.preprocessing import LabelEncoder
 from itertools import product
 from lib.ml_oversampling import MLSol
 
+# Warnings turn off
+warnings.simplefilter('ignore', np.RankWarning)
+warnings.filterwarnings('ignore')
 
 pd.set_option("display.max.columns", None)
 plt.style.use('seaborn')
