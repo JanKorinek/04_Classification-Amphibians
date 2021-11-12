@@ -23,8 +23,6 @@ from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 from sklearn.metrics import roc_curve, auc
 from sklearn.utils.fixes import loguniform
 
-from learning_curve import plot_learning_curve
-
 # Warnings turn off
 warnings.simplefilter('ignore', np.RankWarning)
 warnings.filterwarnings('ignore')
@@ -210,7 +208,7 @@ def train_model(X_train, X_test, y_train, y_test, pipe, param_grid,
                               random_state=42,
                               n_jobs = -1,
                               scoring=scoring,
-                              refit='roc_auc',)
+                              refit='f1_samples',)
     rand.fit(X_train, y_train)
     y_pred = rand.predict(X_test)
 
@@ -244,47 +242,6 @@ def train_model(X_train, X_test, y_train, y_test, pipe, param_grid,
     return rand, eval, y_pred, scoring
 
 
-def plot_model_comparison(models, X_train, y_train, input_params):
-    """
-    Plotting comparison of learning curves for selected models.
-    """
-    print(f'\nLearning curves plotting computation in process...\n')
-
-    # Start timer for runtime
-    time_start = time.time()
-
-    # Define subplots
-    fig = plt.figure(figsize=(10, 10))
-    ax1 = fig.add_subplot(221)
-    ax2 = fig.add_subplot(222)
-    ax3 = fig.add_subplot(223)
-    ax4 = fig.add_subplot(224)
-
-    # Set titles
-    ax1.set_title("Logistic Classification")
-    ax2.set_title("KNeighbor Classification")
-    ax3.set_title("Decision Tree Classification")
-    ax4.set_title("Random Forest Classification")
-
-    # Define axes limits
-    # for ax in [ax1, ax2, ax3, ax4]:
-    #     ax.set_ylim((0.1, 1.2))
-
-    # Plot learning curves
-    plot_learning_curve(models[0], X_train, y_train, ax1, input_params)
-    plot_learning_curve(models[1], X_train, y_train, ax2, input_params)
-    plot_learning_curve(models[2], X_train, y_train, ax3, input_params)
-    plot_learning_curve(models[3], X_train, y_train, ax4, input_params)
-
-    plt.savefig('export/learning_curves_comparison.pdf', dpi=600)
-    plt.show()
-
-    m, s = divmod(time.time()-time_start, 60)
-    h, m = divmod(m, 60)
-    print(f'\nLearning curves plotted in:', '%d:%02d:%02d'%(h, m, s))
-
-
-
 if __name__ == "__main__":
     # Runtime initiation
     run_start = time.time()
@@ -293,7 +250,7 @@ if __name__ == "__main__":
     # General Parameters
     input_params = {
         'n_splits': 5,
-        'n_iter': 8,
+        'n_iter': 128,
     }
 
     # Data import
