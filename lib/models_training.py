@@ -227,7 +227,7 @@ if __name__ == "__main__":
     # General Parameters
     input_params = {
         'n_splits': 5,
-        'n_iter': 1,
+        'n_iter': 32,
     }
 
     # Data import
@@ -248,7 +248,7 @@ if __name__ == "__main__":
 
     param_rand_l = {
         'clf__estimator__C': loguniform(1e-4, 1e4),
-        'clf__estimator__penalty': ['none', 'l1', 'l2', 'elasticnet'],
+        'clf__estimator__penalty': ['l1', 'l2', 'elasticnet'],
         'clf__estimator__solver': ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'],
         'clf__estimator__class_weight': ['balanced', None],
     }
