@@ -42,32 +42,9 @@ plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
 plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
 plt.rc('figure', titlesize=LARGE_SIZE)   # fontsize of the figure title
 
-## model specific variables (iterate the version and note with each change)
+# Model specific variables
 MODEL_VERSION = 0.1
 MODEL_VERSION_NOTE = "Supervised learning model for Amphibians classification"
-
-def split_dataset(df):
-    """
-    Function for splitting dataset and selecting evaluation data between
-    01-01-2017 and 31-12-2018.
-    """
-    # Selecting training dataset
-    to_date = datetime.date(2016, 12, 30)
-    df_train = df.loc[:to_date]
-
-    X_train = df_train.drop(columns=['Volume'])
-    y_train = df_train[['Volume']].values.ravel()
-
-    # Selecting evaluation dataset
-    from_date = datetime.date(2017, 1, 3)
-    to_date = datetime.date(2018, 12, 31)
-    df_test = df.loc[from_date:to_date]
-
-    X_test = df_test.drop(columns=['Volume'])
-    y_test = df_test[['Volume']].values.ravel()
-
-    return X_train, X_test, y_train, y_test
-
 
 def plot_roc(y_test, y_pred, preffix):
     """
@@ -169,7 +146,7 @@ def compare_roc(scoring):
         tpr = i[1]['micro']
         roc_auc = i[2]['micro']
         plt.plot(fpr, tpr, color=color, lw=lw,
-            label="{0} mode ROC curve (area = {1:0.2f})".format(name, roc_auc),
+            label="{0} model ROC curve (area = {1:0.2f})".format(name, roc_auc),
         )
 
     plt.plot([0, 1], [0, 1], "k--", lw=lw)
@@ -250,15 +227,15 @@ if __name__ == "__main__":
     # General Parameters
     input_params = {
         'n_splits': 5,
-        'n_iter': 128,
+        'n_iter': 1,
     }
 
     # Data import
     amph = pd.read_pickle('data/amphibians_oversample.pickle')
 
     # Prepare train-test split
-    target_columns = ['Green frogs', 'Brown frogs', 'Common toad', 'Fire-bellied toad', 'Tree frog', 'Common newt',
-                      'Great crested newt']
+    target_columns = ['Green frogs', 'Brown frogs', 'Common toad', 'Fire-bellied toad',
+                      'Tree frog', 'Common newt', 'Great crested newt']
 
     X = amph.drop(columns=target_columns)
     y = amph[target_columns]  # Targets

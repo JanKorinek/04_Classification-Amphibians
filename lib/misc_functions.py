@@ -5,7 +5,6 @@ Collection of support functions for EDA.
 # Libraries import
 import time, warnings
 import numpy as np
-import pandas
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -58,7 +57,7 @@ def print_corr_matrix(df):
 
     # Plot the matrix
     sns.heatmap(corr, mask=mask, annot=True, square=True, linewidths=.5, vmin=-1, vmax=1, cmap=cmap, ax=ax)
-    plt.title("Amphibians Correlation matrix", fontsize=MEDIUM_SIZE, fontweight='bold')
+    plt.title("Amphibians Correlation Matrix", fontsize=MEDIUM_SIZE, fontweight='bold')
     plt.xlabel("Features", fontweight='bold', fontsize=SMALL_SIZE, )
     plt.ylabel("Features", fontweight='bold', fontsize=SMALL_SIZE, )
     plt.tight_layout()
@@ -92,6 +91,7 @@ def encode_labels(df):
     :param df: Df with features containing categorical labels
     :return: Encoded Df
     """
+    # Encode each label column
     X_cat_enc = pd.DataFrame()
     for col in df.columns:
         array_enc = LabelEncoder().fit_transform(df[col])
@@ -104,6 +104,10 @@ def encode_labels(df):
 def run_ml_sampling(X, y, ratios, neighbors):
     """
     Perform multi-label oversampling of the input dataset.
+    Sampling class MLSol() is part of the research performed by Bin Liuand and
+    Grigorios Tsoumaka published in following paper:
+    Synthetic Oversampling of Multi-Label Data based on Local Label Distribution.
+    Respective authors takes all the credit for the code in this class.
     :param X: Features DF
     :param y: Targets DF
     :param ratios: (array) Oversampling ratio
@@ -151,13 +155,15 @@ def concat_df(main, pred, preffix):
     :param pred: Predicted volume
     :return: Concatenated Df
     """
+    # Instantiate DF
     is_df = ()
 
+    # Check if input data has dataframe format
     try:
         is_df = pred.values.min
     except: AttributeError('Not and DF type')
 
-
+    # Append columns into numpy array data
     if not is_df:
         y_cols = ['Green frogs', 'Brown frogs', 'Common toad', 'Fire-bellied toad',
                   'Tree frog', 'Common newt', 'Great crested newt']
@@ -167,6 +173,7 @@ def concat_df(main, pred, preffix):
             y_cols_new.append(col_new)
         pred = pd.DataFrame(data=pred, index=main.index, columns=y_cols_new)
 
+    # Concat dataframes
     con = pd.concat([main, pred], axis=1, ignore_index=False)
 
     return con

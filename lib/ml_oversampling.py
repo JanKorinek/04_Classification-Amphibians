@@ -1,11 +1,4 @@
-import warnings
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# Warnings turn off
-warnings.simplefilter('ignore', np.RankWarning)
-warnings.filterwarnings('ignore')
 
 class MLSol:
     def __init__(self):
@@ -254,26 +247,3 @@ class MLSol:
                 Y_c[j] = Y_s[j] if cd <= theta else Y_r[j]
 
         return X_c, Y_c
-
-
-if __name__ == "__main__":
-    X = pd.read_excel('data/X.xlsx', index_col=0)
-    X_num = pd.read_excel('data/X_num.xlsx', index_col=0)
-    X_cat = pd.read_excel('data/X_cat.xlsx', index_col=0)
-    Y = pd.read_excel('data/y.xlsx', index_col=0)
-
-    sampler = MLSol()
-    # X = np.random.normal(size=(1000, 3))
-    # Y = np.random.randint(2, size=(1000, 5))
-
-    X_df = pd.DataFrame(data=X)
-    y_df = pd.DataFrame(data=Y)
-
-    X_s, Y_s = sampler.oversample(X.values, Y.values, 2, 15) # generate 10% more instances with 5 nearest neighbors
-
-    X_df_s = pd.DataFrame(data=X_s)
-    y_df_s = pd.DataFrame(data=Y_s)
-
-    print(X.shape, Y.shape)  # (1100, 3) (1100, 5)
-
-    #figsize=(25,15), bins=20
