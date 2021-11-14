@@ -23,7 +23,7 @@ Complete EDA with model training can be run by`EDA-Amphibians_Classification.ipy
 ## Usage
 * Download and go into the repository:
 
-`$ git clone https://gitfront.io/r/korinek-j/85314b23948844ce0ca447b2a2c3711fd0967662/Korinek-Sample-Repo.git`
+`$ git clone https://gitfront.io/r/korinek-j/67a162cc96f0b8781a7e0f36d989e639a110ce22/04-Classification-Amphibians.git`
 
 `$ cd 04_Classification-Amphibians`
 
