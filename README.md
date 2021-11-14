@@ -31,4 +31,4 @@ Complete EDA with model training can be run by`EDA-Amphibians_Classification.ipy
 
 * Install libraries in `requirements.txt`
 
-* Run `$ jupyter-lab EDA-Amphibians_Classification.ipynb
+* Run `$ jupyter-lab EDA-Amphibians_Classification.ipynb`
