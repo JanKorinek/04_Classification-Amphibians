@@ -21,7 +21,7 @@ Complete EDA with model training can be run by`EDA-Amphibians_Classification.ipy
     EDA-Amphibians_Classification.ipynb     # Main analysis and models training file
 
 ## Usage
-* Download and go into the repository:
+* Clone the repository below:
 
 `$ git clone https://gitfront.io/r/korinek-j/67a162cc96f0b8781a7e0f36d989e639a110ce22/04-Classification-Amphibians.git`
 
